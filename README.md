@@ -149,4 +149,4 @@ or
 uvicorn main:app --reload --host 127.0.0.1 --workers 4 --port 5001 --uds /tmp/uvicornblip.sock
 
 ## App Android Demo Image Caption
-Changed https://demo.com:8443 to link api image caption
+Changed https://demo.com:8443 to link API for image captioning.
