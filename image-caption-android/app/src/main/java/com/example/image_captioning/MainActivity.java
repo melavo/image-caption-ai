@@ -263,8 +263,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
         generate_button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 if (imageView.getDrawable() == null){
-                    if(selectedLanguage == 43){tts_custom.speak("Chọn một hình ảnh từ thiết bị của bạn hoặc sử dụng máy ảnh của bạn để chụp một hình ảnh. Sau đó chúng tôi sẽ tạo chú thích cho bạn", TextToSpeech.QUEUE_FLUSH, null);}
-                    else{tts.speak("Select an image from your device or use your camera to capture one. We'll then generate a caption for you.", TextToSpeech.QUEUE_FLUSH, null);}
+                    tts.speak("Select an image from your device or use your camera to capture one. We'll then generate a caption for you.", TextToSpeech.QUEUE_FLUSH, null);
 
                     return;
                 }
@@ -272,8 +271,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
 
 
                 getSelectedLanguage(selectedLanguage);
-                if(selectedLanguage == 43){tts_custom.speak("Đang tạo chú thích", TextToSpeech.QUEUE_FLUSH, null);}
-                else{tts.speak("Caption is generating", TextToSpeech.QUEUE_FLUSH, null);}
+                tts.speak("Caption is generating", TextToSpeech.QUEUE_FLUSH, null);
                 caption_text.setVisibility(View.VISIBLE);
                 generate_button.setVisibility(View.INVISIBLE);
 
@@ -552,8 +550,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
         tts_custom.setPitch(pitch);
         if (MainActivity.getLanguage()){
             getSelectedLanguage(selectedLanguage);
-            if(selectedLanguage == 43){tts_custom.speak("thư viện ảnh", TextToSpeech.QUEUE_FLUSH, null);}
-            else{tts.speak("gallery", TextToSpeech.QUEUE_FLUSH, null); }} }
+            tts.speak("gallery", TextToSpeech.QUEUE_FLUSH, null);} }
     private void camera() {
         getSpeechSpeed();
         float speed =speed_value/50;
@@ -567,8 +564,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
         tts_custom.setPitch(pitch);
         if (MainActivity.getLanguage()){
             getSelectedLanguage(selectedLanguage);
-            if(selectedLanguage == 43){tts_custom.speak("Máy ảnh", TextToSpeech.QUEUE_FLUSH, null);}
-            tts.speak("camera", TextToSpeech.QUEUE_FLUSH, null); }}
+            tts.speak("camera", TextToSpeech.QUEUE_FLUSH, null);}
     private void microphone() {
         getSpeechSpeed();
         float speed =speed_value/50;
@@ -582,8 +578,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
         tts_custom.setPitch(pitch);
         if (MainActivity.getLanguage()){
             getSelectedLanguage(selectedLanguage);
-            if(selectedLanguage == 43){tts_custom.speak("mic cờ rô", TextToSpeech.QUEUE_FLUSH, null);}
-            else{tts.speak("microphone", TextToSpeech.QUEUE_FLUSH, null); } }}
+            tts.speak("microphone", TextToSpeech.QUEUE_FLUSH, null); }}
 
     private void open_gallery(){
         Intent intent = new Intent();
@@ -591,16 +586,14 @@ public class MainActivity<original, tts> extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         if (MainActivity.getLanguage()){
             getSelectedLanguage(selectedLanguage);
-            if(selectedLanguage == 43){tts_custom.speak("Thư viện ảnh được mở", TextToSpeech.QUEUE_FLUSH, null);}
-            else{tts.speak("Gallery is opened", TextToSpeech.QUEUE_FLUSH, null); }}
+            tts.speak("Gallery is opened", TextToSpeech.QUEUE_FLUSH, null);}
         caption_text.setVisibility(View.INVISIBLE);
         startActivityForResult(intent, SELECT_IMAGE);
     }
     private void open_camera(){
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         getSelectedLanguage(selectedLanguage);
-        if(selectedLanguage == 43){tts_custom.speak("Máy ảnh được mở", TextToSpeech.QUEUE_FLUSH, null);}
-        else{tts.speak("Camera is opened",TextToSpeech.QUEUE_FLUSH, null);}
+        tts.speak("Camera is opened",TextToSpeech.QUEUE_FLUSH, null);
         caption_text.setVisibility(View.INVISIBLE);
         startActivityForResult(camera,IMAGE_CAMERA_CODE);
     }
@@ -609,10 +602,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
         voice.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         voice.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         getSelectedLanguage(selectedLanguage);
-        if(selectedLanguage == 43){tts_custom.speak("Làm thế nào để tôi giúp bạn?", TextToSpeech.QUEUE_FLUSH, null);
-            voice.putExtra(RecognizerIntent.EXTRA_PROMPT, "Làm thế nào để tôi giúp bạn?");}
-        else{voice.putExtra(RecognizerIntent.EXTRA_PROMPT, "How can I help you?");
-            tts.speak("How can I help you?",TextToSpeech.QUEUE_FLUSH, null);}
+        tts.speak("How can I help you?",TextToSpeech.QUEUE_FLUSH, null);
         startActivityForResult(voice, MICROPHONE_CODE);
     }
 
@@ -635,7 +625,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url("https://expansionnetcaptioner.dqsinh.com:8443/predict") //https://captioner.dqsinh.com/predict/
+                .url("https://demo.com:8443/predict")
                 .post(requestBody)
                 .build();
         client.newCall(request).enqueue(new Callback() {
@@ -674,8 +664,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
                                 mProgressHUD.dismiss();
 
                                 getSelectedLanguage(selectedLanguage);
-                                if(selectedLanguage == 43){tts_custom.speak("Vui lòng nhấn vào loa để nghe chú thích", TextToSpeech.QUEUE_FLUSH, null);}
-                                else{tts.speak("Please tap the speaker to listen to caption", TextToSpeech.QUEUE_FLUSH, null);}
+                                tts.speak("Please tap the speaker to listen to caption", TextToSpeech.QUEUE_FLUSH, null);
                                 caption_text.setText(text);
                                 translateTextToLanguage();
 
@@ -731,9 +720,7 @@ public class MainActivity<original, tts> extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
                 imageView.setImageBitmap(bitmap);
                 getSelectedLanguage(selectedLanguage);
-                if(selectedLanguage == 43){tts_custom.speak("Hình ảnh được tải lên", TextToSpeech.QUEUE_FLUSH, null);}
-                else{tts.speak("Image is uploaded", TextToSpeech.QUEUE_FLUSH, null);}
-
+                tts.speak("Image is uploaded", TextToSpeech.QUEUE_FLUSH, null);
 
             }
             catch (IOException e) {

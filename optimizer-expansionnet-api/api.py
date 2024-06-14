@@ -54,7 +54,7 @@ model = End_OptimizerExpansionNet(swin_img_size=img_size, swin_patch_size=4, swi
                                 max_seq_len=max_seq_len, drop_args=model_args.drop_args,
                                 rank='cpu')
    
-#checkpoint = torch.load(load_path, map_location=torch.device('cuda:0'))
+
 checkpoint = torch.load(load_path)
 model.load_state_dict(checkpoint['model_state_dict'])
 
